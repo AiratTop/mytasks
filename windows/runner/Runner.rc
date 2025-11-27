@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "top.airat" "\0"
-            VALUE "FileDescription", "mytasks" "\0"
+            VALUE "FileDescription", "MyTasks" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "mytasks" "\0"
+            VALUE "InternalName", "MyTasks" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 top.airat. All rights reserved." "\0"
-            VALUE "OriginalFilename", "mytasks.exe" "\0"
-            VALUE "ProductName", "mytasks" "\0"
+            VALUE "OriginalFilename", "MyTasks.exe" "\0"
+            VALUE "ProductName", "MyTasks" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

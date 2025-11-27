@@ -1,11 +1,11 @@
 {
-    "name": "mytasks",
-    "short_name": "mytasks",
+    "name": "MyTasks",
+    "short_name": "MyTasks",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Fast offline-first open-source task manager.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

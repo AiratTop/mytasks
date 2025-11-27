@@ -1,6 +1,6 @@
-# mytasks
+# MyTasks
 
-A new Flutter project.
+MyTasks is a fast, offline-first, open-source task manager focused on quick local capture and completion of personal todos.
 
 ## Getting Started
 

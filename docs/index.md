@@ -23,7 +23,7 @@ flutter test
 ```
 
 ## Download & Support
-- iOS App Store: _coming soon_
+- iOS App Store: [apps.apple.com/app/id6755858152](https://apps.apple.com/app/id6755858152)
 - Privacy Policy: [mytasks.airat.top/privacy](https://mytasks.airat.top/privacy)
 - Contact: [mail@airat.top](mailto:mail@airat.top)
 

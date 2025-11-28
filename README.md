@@ -1,5 +1,7 @@
 # MyTasks
 
+![MyTasks – Private Todo](https://github.com/AiratTop/mytasks/blob/main/assets/icon/icon.png)
+
 MyTasks is a fast, offline-first task manager focused on instant capture and completion of personal todos. It keeps every task on-device, so nothing is sent to external services and the experience stays private by design.
 
 ### Highlights

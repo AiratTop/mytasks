@@ -1,8 +1,4 @@
-<link rel="icon" type="image/png" href="/favicon.png">
-
 # MyTasks Privacy Policy
-
-<link rel="icon" type="image/png" href="/favicon.png">
 
 _Last updated: November 28, 2025_
 

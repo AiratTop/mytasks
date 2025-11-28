@@ -1,7 +1,5 @@
 # MyTasks
 
-<link rel="icon" type="image/png" href="/favicon.png">
-
 ![MyTasks – Private Todo](./icon.png)
 
 MyTasks is a fast, offline-first task manager focused on instant capture and completion of personal todos. It keeps every task on-device, so nothing is sent to external services and the experience stays private by design.

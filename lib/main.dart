@@ -96,57 +96,83 @@ class _TaskHomePageState extends State<TaskHomePage> {
   void _showAddTaskSheet() {
     _controller.clear();
 
-    showModalBottomSheet<void>(
+    showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
       showDragHandle: true,
       builder: (ctx) {
-        return Padding(
-          padding: EdgeInsets.fromLTRB(
-            24,
-            24,
-            24,
-            24 + MediaQuery.of(ctx).viewInsets.bottom,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('New task', style: Theme.of(context).textTheme.titleLarge),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _controller,
-                autofocus: true,
-                textInputAction: TextInputAction.done,
-                onSubmitted: (_) => _submitTask(ctx),
-                decoration: const InputDecoration(
-                  labelText: 'Title',
-                  hintText: "Capture what's next",
-                ),
+        String? errorText;
+
+        Future<void> submit(StateSetter setModalState) async {
+          final value = _controller.text.trim();
+          final validation = _validateTitle(value);
+          if (validation != null) {
+            setModalState(() => errorText = validation);
+            return;
+          }
+          Navigator.of(ctx).pop(value);
+        }
+
+        return StatefulBuilder(
+          builder: (context, modalSetState) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                24,
+                24,
+                24,
+                24 + MediaQuery.of(ctx).viewInsets.bottom,
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: () => _submitTask(ctx),
-                  icon: const Icon(Icons.check),
-                  label: const Text('Add task'),
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'New task',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _controller,
+                    autofocus: true,
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: (_) => submit(modalSetState),
+                    decoration: InputDecoration(
+                      labelText: 'Title',
+                      hintText: "Capture what's next",
+                      errorText: errorText,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      onPressed: () => submit(modalSetState),
+                      icon: const Icon(Icons.check),
+                      label: const Text('Add task'),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            );
+          },
         );
       },
-    );
-  }
-
-  void _submitTask(BuildContext sheetContext) {
-    final value = _controller.text;
-    _addTask(value).then((_) {
-      if (sheetContext.mounted) {
-        Navigator.of(sheetContext).pop();
+    ).then((value) {
+      if (value != null) {
+        _addTask(value);
       }
     });
+  }
+
+  String? _validateTitle(String value) {
+    if (value.isEmpty) {
+      return 'Enter a task title';
+    }
+    final exists = _tasks.any(
+      (task) => task.toLowerCase() == value.toLowerCase(),
+    );
+    if (exists) return 'Task already exists';
+    return null;
   }
 
   @override
@@ -192,16 +218,6 @@ class _TaskHomePageState extends State<TaskHomePage> {
                           task,
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.w600),
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.more_horiz),
-                          onPressed: null,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSurfaceVariant.withOpacity(0.4),
-                          disabledColor: Theme.of(
-                            context,
-                          ).colorScheme.onSurfaceVariant.withOpacity(0.2),
                         ),
                       ),
                     );

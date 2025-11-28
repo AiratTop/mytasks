@@ -32,6 +32,18 @@ void main() {
 
     expect(find.text('Water the plants'), findsOneWidget);
 
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField), 'Water the plants');
+    await tester.tap(find.text('Add task'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Task already exists'), findsOneWidget);
+
+    await tester.tapAt(const Offset(10, 10));
+    await tester.pumpAndSettle();
+
     await tester.tap(find.byType(Checkbox).first);
     await tester.pumpAndSettle();
 

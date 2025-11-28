@@ -1,4 +1,8 @@
+<link rel="icon" type="image/png" href="/favicon.png">
+
 # MyTasks Privacy Policy
+
+<link rel="icon" type="image/png" href="/favicon.png">
 
 _Last updated: November 28, 2025_
 
@@ -25,4 +29,4 @@ MyTasks is a fully offline task manager. We designed the app so that your data n
 - If the behavior of the app ever changes, we will update this document and provide the revision date above.
 
 ## Contact
-If you have questions or requests regarding privacy, email **mail@airat.top**.
+If you have questions or requests regarding privacy, email: [mail@airat.top](mailto:mail@airat.top)

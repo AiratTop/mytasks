@@ -2,14 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _storageKey = 'mytasks_items';
+const _themeModeKey = 'mytasks_theme_mode';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyTasksApp());
 }
 
-class MyTasksApp extends StatelessWidget {
+class MyTasksApp extends StatefulWidget {
   const MyTasksApp({super.key});
+
+  @override
+  State<MyTasksApp> createState() => _MyTasksAppState();
+}
+
+class _MyTasksAppState extends State<MyTasksApp> {
+  ThemeMode _themeMode = ThemeMode.system;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadThemeMode();
+  }
+
+  Future<void> _loadThemeMode() async {
+    final prefs = await SharedPreferences.getInstance();
+    final stored = prefs.getString(_themeModeKey);
+    if (stored == null) return;
+    setState(() => _themeMode = _themeModeFromString(stored));
+  }
+
+  void _toggleTheme(bool isDark) {
+    final next = isDark ? ThemeMode.light : ThemeMode.dark;
+    setState(() => _themeMode = next);
+    _persistThemeMode(next);
+  }
+
+  Future<void> _persistThemeMode(ThemeMode mode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_themeModeKey, _themeModeToString(mode));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +49,8 @@ class MyTasksApp extends StatelessWidget {
       title: 'MyTasks',
       theme: _buildTheme(Brightness.light),
       darkTheme: _buildTheme(Brightness.dark),
-      themeMode: ThemeMode.system,
-      home: const TaskHomePage(),
+      themeMode: _themeMode,
+      home: TaskHomePage(onToggleTheme: _toggleTheme),
     );
   }
 
@@ -45,10 +77,35 @@ class MyTasksApp extends StatelessWidget {
       ),
     );
   }
+
+  ThemeMode _themeModeFromString(String value) {
+    switch (value) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
+      case 'system':
+      default:
+        return ThemeMode.system;
+    }
+  }
+
+  String _themeModeToString(ThemeMode mode) {
+    switch (mode) {
+      case ThemeMode.light:
+        return 'light';
+      case ThemeMode.dark:
+        return 'dark';
+      case ThemeMode.system:
+        return 'system';
+    }
+  }
 }
 
 class TaskHomePage extends StatefulWidget {
-  const TaskHomePage({super.key});
+  const TaskHomePage({super.key, required this.onToggleTheme});
+
+  final void Function(bool isDark) onToggleTheme;
 
   @override
   State<TaskHomePage> createState() => _TaskHomePageState();
@@ -183,12 +240,24 @@ class _TaskHomePageState extends State<TaskHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'MyTasks',
+          'MyTasks (${_tasks.length})',
           style: Theme.of(context).textTheme.headlineSmall,
         ),
+        actions: [
+          IconButton(
+            tooltip: isDarkMode
+                ? 'Switch to light theme'
+                : 'Switch to dark theme',
+            icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+            onPressed: () => widget.onToggleTheme(isDarkMode),
+          ),
+          const SizedBox(width: 4),
+        ],
       ),
       body: SafeArea(
         child: AnimatedSwitcher(

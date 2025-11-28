@@ -47,6 +47,7 @@ class _MyTasksAppState extends State<MyTasksApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'MyTasks',
+      debugShowCheckedModeBanner: false,
       theme: _buildTheme(Brightness.light),
       darkTheme: _buildTheme(Brightness.dark),
       themeMode: _themeMode,

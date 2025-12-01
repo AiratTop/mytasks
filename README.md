@@ -25,3 +25,8 @@ flutter test
 ```
 
 Built with Flutter and open to contributions. Write to `mail@airat.top` for questions or collaborations.
+
+## Download & Support
+- iOS App Store: [apps.apple.com/app/id6755858152](https://apps.apple.com/app/id6755858152)
+- Privacy Policy: [mytasks.airat.top/privacy](https://mytasks.airat.top/privacy)
+- Contact: [mail@airat.top](mailto:mail@airat.top)

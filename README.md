@@ -30,3 +30,20 @@ Built with Flutter and open to contributions. Write to `mail@airat.top` for ques
 - iOS App Store: [apps.apple.com/app/id6755858152](https://apps.apple.com/app/id6755858152)
 - Privacy Policy: [mytasks.airat.top/privacy](https://mytasks.airat.top/privacy)
 - Contact: [mail@airat.top](mailto:mail@airat.top)
+
+## License
+
+The original application source code, configuration, and documentation in this repository are
+licensed under the [Apache License 2.0](LICENSE), with copyright details in [NOTICE](NOTICE).
+
+Flutter and the packages listed in `pubspec.yaml` and `pubspec.lock` are third-party software
+and remain subject to their respective licenses.
+
+## Author
+
+**AiratTop (Airat Halitov)**
+
+- Website: [airat.top](https://airat.top)
+- GitHub: [@AiratTop](https://github.com/AiratTop)
+- Email: [mail@airat.top](mailto:mail@airat.top)
+- Repository: [mytasks](https://github.com/AiratTop/mytasks)
